@@ -1,71 +1,146 @@
-# Frootify 🍎
+# Frootify 🍅
 
-Frootify is a Machine Learning based smart post-harvest storage monitoring system designed to predict fruit spoilage risk using environmental conditions.
+Frootify is a smart post-harvest monitoring system designed to predict tomato spoilage risk using environmental conditions and machine learning.
 
-## Features
+## Project Overview
 
-- Predicts spoilage risk using Random Forest Classification
-- Generates spoilage probability percentage
-- Provides storage recommendations using a rule engine
-- Supports multiple fruit categories
-- Designed for future Raspberry Pi + sensor integration
+The current system uses a Random Forest classifier deployed on a Raspberry Pi 4 to assess spoilage risk based on:
 
-## Inputs
+* Temperature
+* Humidity
 
-- Fruit Type
-- Temperature
-- Humidity
-- Light Intensity
-- CO2 Levels
+Environmental data is collected automatically using a DHT11 sensor connected to the Raspberry Pi.
 
-## Outputs
-
-- Good / Bad Prediction
-- Spoilage Probability (%)
-- Storage Recommendation
-- Suggested Actions
-
-## Tech Stack
-
-- Python
-- Scikit-Learn
-- Pandas
-- NumPy
-- Random Forest Classifier
-- Joblib
-
-## Project Structure
-
-```
-frootify/
-
-├── src/
-│   ├── app.py
-│   ├── predict.py
-│   ├── rule_engine.py
-│   └── models/
-│       ├── fruit_spoilage_rf.pkl
-│       └── feature_order.pkl
-│
-├── eda.py
-├── README.md
-```
-
-## Future Scope
-
-- Raspberry Pi Deployment
-- Sensor Integration
-- Cloud Dashboard
-- Real-Time Monitoring
-- Automated Storage Recommendations
-
-## Run Project
-
-```bash
-cd src
-python app.py
-```
+The system then provides spoilage predictions and storage recommendations through a rule engine.
 
 ---
 
-Built as a smart storage and spoilage prediction system for post-harvest management.
+## Current Features
+
+* Tomato spoilage risk prediction
+* Random Forest machine learning model
+* Raspberry Pi 4 deployment
+* Automatic DHT11 sensor integration
+* Good/Bad classification
+* Spoilage probability estimation
+* Shelf-life recommendations based on prediction confidence
+* Actionable storage suggestions
+
+---
+
+## System Architecture
+
+DHT11 Sensor
+
+↓
+
+Raspberry Pi 4
+
+↓
+
+Feature Engineering
+
+↓
+
+Random Forest Model
+
+↓
+
+Rule Engine
+
+↓
+
+Prediction & Recommendations
+
+---
+
+## Inputs
+
+* Temperature (°C)
+* Humidity (%)
+
+## Engineered Features
+
+* Temp
+* Humid (%)
+* Temp_Humidity
+* High_Humidity
+
+## Outputs
+
+* Good / Bad Prediction
+* Bad Probability (%)
+* Shelf Recommendation
+* Suggested Actions
+
+---
+
+## Tech Stack
+
+* Python
+* Scikit-Learn
+* Pandas
+* NumPy
+* Joblib
+* Raspberry Pi 4
+* DHT11 Sensor
+
+---
+
+## Project Structure
+
+frootify/
+
+├── src/
+
+│   ├── app.py
+
+│   ├── predict.py
+
+│   ├── rule_engine.py
+
+│   └── models/
+
+│       ├── fruit_spoilage_rf_tomato.pkl
+
+│       ├── feature_order_tomato.pkl
+
+│       └── preprocessing_tomato.pkl
+
+├── README.md
+
+└── .gitignore
+
+---
+
+## Future Work
+
+The next phase of Frootify is currently under development.
+
+A computer vision model is being trained to classify tomatoes as:
+
+* Fresh
+* Rotten
+
+using image classification techniques.
+
+The long-term goal is to combine:
+
+* Environmental risk assessment (sensor model)
+* Visual spoilage detection (image model)
+
+to create a more robust hybrid spoilage monitoring system.
+
+---
+
+## Running the Project
+
+From the src directory:
+
+python app.py
+
+The Raspberry Pi automatically reads data from the DHT11 sensor and generates spoilage predictions and recommendations.
+
+---
+
+Built as a smart post-harvest tomato monitoring system combining IoT and Machine Learning.
