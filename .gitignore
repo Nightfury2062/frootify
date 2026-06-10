@@ -1,0 +1,18 @@
+# Old models
+old_frootify/
+
+# Datasets
+Dataset.csv
+Dataset_with_dup.csv
+Dataset_with_dup_capital.csv
+
+Dataset_tomato_final/
+archive/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env

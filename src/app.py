@@ -1,186 +1,114 @@
 from predict import predict_spoilage
-
 from rule_engine import generate_recommendation
 
 
-VALID_FRUITS={
-
-1:'Banana',
-
-2:'Orange',
-
-3:'Pineapple',
-
-4:'Tomato'
-
-}
-
-
-def get_fruit():
-
-    print()
-
-    print("Choose Fruit:")
-
-    print("1 Banana")
-
-    print("2 Orange")
-
-    print("3 Pineapple")
-
-    print("4 Tomato")
+def get_sensor_value(message, min_value, max_value):
 
     try:
 
-        choice=int(
-            input(
-                "Enter choice: "
-            )
-        )
+        value = float(input(message))
 
     except:
 
-        print(
-            "Invalid input."
-        )
+        print("Invalid input")
 
         exit()
 
 
-    if choice not in VALID_FRUITS:
+    if value < min_value or value > max_value:
 
         print(
-            "Invalid fruit choice."
+
+            f"Value must be between {min_value} and {max_value}"
+
         )
 
         exit()
 
-
-    return VALID_FRUITS[
-        choice
-    ]
-
-
-def get_sensor_value(
-        message,
-        min_value,
-        max_value
-):
-
-    try:
-
-        value=float(
-            input(
-                message
-            )
-        )
-
-    except:
-
-        print(
-            "Invalid numeric input."
-        )
-
-        exit()
-
-
-    if value<min_value or value>max_value:
-
-        print(
-
-f"Value must be between {min_value} and {max_value}"
-
-        )
-
-        exit()
 
     return value
 
 
+temp = get_sensor_value(
 
-fruit=get_fruit()
+    "Temperature: ",
 
+    0,
 
-temp=get_sensor_value(
-
-"Temperature: ",
-
-0,
-
-50
-
-)
-
-humidity=get_sensor_value(
-
-"Humidity: ",
-
-0,
-
-100
-
-)
-
-light=get_sensor_value(
-
-"Light: ",
-
-0,
-
-1000
-
-)
-
-co2=get_sensor_value(
-
-"CO2: ",
-
-0,
-
-5000
+    50
 
 )
 
 
+humidity = get_sensor_value(
 
-prediction,bad_probability = predict_spoilage(fruit,temp,humidity,light,co2)
+    "Humidity: ",
 
+    0,
 
-result=generate_recommendation(
-
-bad_probability,
-
-humidity,
-
-temp
+    100
 
 )
 
+
+prediction, bad_probability = predict_spoilage(
+
+    temp,
+
+    humidity
+
+)
+
+
+result = generate_recommendation(
+
+    bad_probability,
+
+    humidity,
+
+    temp
+
+)
 
 
 print()
 
 print(
-"Prediction:",
-prediction
+
+    "Prediction:",
+
+    prediction
+
 )
 
 print(
-"Shelf Recommendation:",
-result["shelf"]
+
+    "Bad Probability:",
+
+    round(
+
+        bad_probability * 100,
+
+        2
+
+    ),
+
+    "%"
+
+)
+
+print(
+
+    "Shelf Recommendation:",
+
+    result["shelf"]
+
 )
 
 print()
 
-print(
-"Actions:"
-)
+print("Actions:")
 
-for action in result[
-"actions"
-]:
+for action in result["actions"]:
 
-    print(
-        "-",
-        action
-    )
+    print("-", action)

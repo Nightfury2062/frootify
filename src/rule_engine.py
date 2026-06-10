@@ -8,22 +8,22 @@ def generate_recommendation(
 
 ):
 
-    actions=[]
+    actions = []
 
 
-    if bad_probability >= 0.7:
+    if bad_probability >= 0.8:
 
-        shelf="Consume within 1-3 days"
+        shelf = "Consume within 1-3 days"
 
 
-    elif bad_probability >= 0.3:
+    elif bad_probability >= 0.5:
 
-        shelf="Consume within 4-7 days"
+        shelf = "Consume within 4-7 days"
 
 
     else:
 
-        shelf="Suitable for long storage"
+        shelf = "Suitable for storage"
 
 
 
@@ -36,7 +36,6 @@ def generate_recommendation(
         )
 
 
-
     if temp > 28:
 
         actions.append(
@@ -46,15 +45,13 @@ def generate_recommendation(
         )
 
 
-
-    if len(actions)==0:
+    if len(actions) == 0:
 
         actions.append(
 
             "Storage conditions acceptable"
 
         )
-
 
 
     return {
