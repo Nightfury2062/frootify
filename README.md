@@ -1,5 +1,7 @@
 # Frootify 🍅
 
+Frootify_v2 - Computer vision project extension of this project - https://github.com/Nightfury2062/frootify_v2_cv
+
 Frootify is a smart post-harvest monitoring system designed to predict tomato spoilage risk using environmental conditions and machine learning.
 
 ## Project Overview
